@@ -8,6 +8,15 @@ class AuthRepositoryImpl implements AuthRepository {
     const { data } = await axios.post(`${config.SERVER}/auth/login`, { code });
     return data;
   }
+
+  public async refresh(
+    accessToken: string
+  ): Promise<{ data: { accessToken: string } }> {
+    const { data } = await axios.post(`${config.SERVER}/auth/refresh`, {
+      accessToken,
+    });
+    return data;
+  }
 }
 
 export default new AuthRepositoryImpl();
